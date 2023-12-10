@@ -1,0 +1,10 @@
+Admin Login Details
+
+Email   : admin@mail.com
+Password: 121255
+
+Employee: amilion123@gmail.com
+Password: 121255
+
+passenger: abdunnoorshihab@gmail.com
+pass: 121255
