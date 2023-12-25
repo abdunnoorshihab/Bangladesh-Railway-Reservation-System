@@ -1,6 +1,7 @@
 <?php
     session_start();
     include('assets/inc/config.php');
+    //date_default_timezone_set('Africa /Nairobi');
     include('assets/inc/checklogin.php');
     check_login();
     $aid=$_SESSION['admin_id'];
@@ -8,8 +9,17 @@
     {
             $id = $_GET['pwd_id'];
             $status = $_POST['status'];
+            //$route = $_POST['route'];
+            //$current = $_POST['current'];
+            //$destination = $_POST['destination'];
+            //$time = $_POST['time'];
+            //$number = $_POST['number'];
+            //$fare = $_POST['fare'];
+            //$passengers = $_POST['passengers'];
+            //sql querry to post the entered information
             $query="update orrs_passwordresets set status = ? where pwd_id=?";
             $stmt = $mysqli->prepare($query);
+            //bind this parameters
             $rc=$stmt->bind_param('si', $status, $id);
             $stmt->execute();
                 if($stmt)
@@ -20,15 +30,23 @@
                 {
                     $err = "Please Try Again Later";
                 }
+            #echo"<script>alert('Your Profile Has Been Updated Successfully');</script>";
             }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<!--Head-->
 <?php include('assets/inc/head.php');?>
+<!--End Head-->
   <body>
     <div class="be-wrapper be-fixed-sidebar ">
+    <!--Navigation Bar-->
       <?php include('assets/inc/navbar.php');?>
+      <!--End Navigation Bar-->
+
+      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
+      <!--End Sidebar-->
       <div class="be-content">
         <div class="page-head">
           <h2 class="page-head-title">Approve Password Reset</h2>
@@ -41,6 +59,7 @@
           </nav>
         </div>
             <?php if(isset($succ)) {?>
+                                <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -51,6 +70,7 @@
 
         <?php } ?>
         <?php if(isset($err)) {?>
+        <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -61,13 +81,15 @@
 
         <?php } ?>
         <div class="main-content container-fluid">
+       <!--password reset instance-->
        <?php
             $aid=$_GET['pwd_id'];
             $ret="select * from orrs_passwordresets where pwd_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
-            $stmt->execute() ;
+            $stmt->execute() ;//ok
             $res=$stmt->get_result();
+            //$cnt=1;
             while($row=$res->fetch_object())
         {
         ?>
@@ -102,9 +124,13 @@
                 </div>
               </div>
             </div>
+       
+        <!--End password reset Instance-->
         <?php }?>
         </div>
+        <!--footer-->
         <?php include('assets/inc/footer.php');?>
+        <!--EndFooter-->
       </div>
 
     </div>
@@ -122,6 +148,7 @@
     <script src="assets/lib/bs-custom-file-input/bs-custom-file-input.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
+      	//-initialize the javascript
       	App.init();
       	App.formElements();
       });

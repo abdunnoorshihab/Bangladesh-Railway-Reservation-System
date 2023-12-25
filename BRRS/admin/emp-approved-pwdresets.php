@@ -1,10 +1,11 @@
-
+<!--Start Server side code to give us and hold session-->
 <?php
   session_start();
   include('assets/inc/config.php');
   include('assets/inc/checklogin.php');
   check_login();
   $aid=$_SESSION['admin_id'];
+  //delete or remove library user  php code
 if(isset($_GET['del']))
 {
       $id=intval($_GET['del']);
@@ -22,15 +23,24 @@ if(isset($_GET['del']))
           {
             $err = "Try Again Later";
           }
+      #echo "<script>alert('Success! Book details removed');</script>" ;
 }
 ?>
+<!--End Server side scriptiing-->
 <!DOCTYPE html>
 <html lang="en">
+<!--HeAD-->
   <?php include('assets/inc/head.php');?>
+ <!-- end HEAD--> 
   <body>
     <div class="be-wrapper be-fixed-sidebar">
+    <!--navbar-->
       <?php include('assets/inc/navbar.php');?>
+      <!--End navbar-->
+      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
+      <!--End Sidebar-->
+
       <div class="be-content">
       <div class="page-head">
           <h2 class="page-head-title">Approved Password Resets</h2>
@@ -43,6 +53,7 @@ if(isset($_GET['del']))
           </nav>
         </div>
         <?php if(isset($succ)) {?>
+                                <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -53,6 +64,7 @@ if(isset($_GET['del']))
 
         <?php } ?>
         <?php if(isset($err)) {?>
+        <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -85,6 +97,9 @@ if(isset($_GET['del']))
                     </thead>
                     <tbody>
                     <?php
+                        /*
+                        *Lets get some details! !
+                        */
                         $ret="SELECT * FROM `orrs_passwordresets` where status ='Approved'  "; //sql code to get all details of psssword reset requests.
                         $stmt= $mysqli->prepare($ret) ;
                         $stmt->execute() ;//ok
@@ -95,7 +110,13 @@ if(isset($_GET['del']))
                     ?>
                       <tr class="odd gradeX even gradeC odd gradeA even gradeA ">
                         <td><?php echo $cnt;?></td>
-                        <td><?php echo $row->email;?></td>               
+                        <td><?php echo $row->email;?></td>
+                      
+                        <!--
+                        <td class="center"><a class ="badge badge-success" href ="emp-confirm-tickets.php?ticket_id=<?php echo $row->ticket_id;?>">Update</a> 
+                            <hr> <a class ="badge badge-danger" href ="emp-manage-tickets.php?del=<?php echo $row->id;?>">Delete</a>
+                        </td>    
+                        -->                  
                       </tr>
                         <?php $cnt = $cnt+1; }?>
                     </tbody>
@@ -104,7 +125,10 @@ if(isset($_GET['del']))
               </div>
             </div>
           </div>
+         
+         <!--footer-->
          <?php include('assets/inc/footer.php');?>
+         <!--End Footer-->
         </div>
       </div>
      
@@ -128,6 +152,7 @@ if(isset($_GET['del']))
     <script src="assets/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
+      	//-initialize the javascript
       	App.init();
       	App.dataTables();
       });

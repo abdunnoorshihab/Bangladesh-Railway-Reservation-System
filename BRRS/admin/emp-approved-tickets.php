@@ -1,10 +1,11 @@
-
+<!--Start Server side code to give us and hold session-->
 <?php
   session_start();
   include('assets/inc/config.php');
   include('assets/inc/checklogin.php');
   check_login();
   $aid=$_SESSION['admin_id'];
+  //delete or remove library user  php code
 if(isset($_GET['del']))
 {
       $id=intval($_GET['del']);
@@ -22,15 +23,24 @@ if(isset($_GET['del']))
           {
             $err = "Try Again Later";
           }
+      #echo "<script>alert('Success! Book details removed');</script>" ;
 }
 ?>
+<!--End Server side scriptiing-->
 <!DOCTYPE html>
 <html lang="en">
+<!--HeAD-->
   <?php include('assets/inc/head.php');?>
+ <!-- end HEAD--> 
   <body>
     <div class="be-wrapper be-fixed-sidebar">
+    <!--navbar-->
       <?php include('assets/inc/navbar.php');?>
+      <!--End navbar-->
+      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
+      <!--End Sidebar-->
+
       <div class="be-content">
       <div class="page-head">
           <h2 class="page-head-title">Approved Tickets</h2>
@@ -43,6 +53,7 @@ if(isset($_GET['del']))
           </nav>
         </div>
         <?php if(isset($succ)) {?>
+                                <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -53,6 +64,7 @@ if(isset($_GET['del']))
 
         <?php } ?>
         <?php if(isset($err)) {?>
+        <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -90,6 +102,9 @@ if(isset($_GET['del']))
                     </thead>
                     <tbody>
                     <?php
+                        /*
+                        *Lets get details of available trains tickets! !
+                        */
                         $ret="SELECT * FROM `orrs_train_tickets` where confirmation ='Approved' "; //sql code to get all details of trains.
                         $stmt= $mysqli->prepare($ret) ;
                         $stmt->execute() ;//ok
@@ -106,7 +121,12 @@ if(isset($_GET['del']))
                         <td class="center"><?php echo $row->train_dep_stat;?></td>
                         <td class="center"><?php echo $row->train_arr_stat;?></td>
                         <td class="center">$<?php echo $row->train_fare;?></td>
-                        <td class="center"><?php echo $row->fare_payment_code;?></td>                  
+                        <td class="center"><?php echo $row->fare_payment_code;?></td>
+                        <!--
+                        <td class="center"><a class ="badge badge-success" href ="emp-confirm-tickets.php?ticket_id=<?php echo $row->ticket_id;?>">Update</a> 
+                            <hr> <a class ="badge badge-danger" href ="emp-manage-tickets.php?del=<?php echo $row->id;?>">Delete</a>
+                        </td>    
+                        -->                  
                       </tr>
                         <?php }?>
                     </tbody>
@@ -115,7 +135,10 @@ if(isset($_GET['del']))
               </div>
             </div>
           </div>
+         
+         <!--footer-->
          <?php include('assets/inc/footer.php');?>
+         <!--End Footer-->
         </div>
       </div>
      
@@ -139,6 +162,7 @@ if(isset($_GET['del']))
     <script src="assets/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
+      	//-initialize the javascript
       	App.init();
       	App.dataTables();
       });

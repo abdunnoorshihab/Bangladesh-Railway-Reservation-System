@@ -137,6 +137,7 @@
         </div>
         <?php include('assets/inc/footer.php');?>
       </div>
+
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>

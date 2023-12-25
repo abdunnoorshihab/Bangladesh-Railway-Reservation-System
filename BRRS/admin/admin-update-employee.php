@@ -18,7 +18,6 @@
 			$stmt = $mysqli->prepare($query);
 			$rc=$stmt->bind_param('sssssssssi',$emp_fname, $emp_lname, $emp_phone, $emp_addr, $emp_nat_idno, $emp_uname, $emp_email, $emp_dept, $emp_pwd, $emp_id);
 			$stmt->execute();
-
 			if($stmt)
 			{
 				$success = "Employee  Account Updated";
@@ -26,14 +25,17 @@
 			else {
 				$err = "Please Try Again Or Try Later";
 			}
+			
+			
 		}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include('assets/inc/head.php');?>
+
   <body>
     <div class="be-wrapper be-fixed-sidebar ">
- 
       <?php include('assets/inc/navbar.php');?>
       <?php include('assets/inc/sidebar.php');?>
       <div class="be-content">
@@ -48,7 +50,6 @@
           </nav>
         </div>
             <?php if(isset($success)) {?>
-              
                 <script>
                             setTimeout(function () 
                             { 
@@ -59,7 +60,6 @@
 
         <?php } ?>
         <?php if(isset($err)) {?>
-       
                 <script>
                             setTimeout(function () 
                             { 
@@ -70,15 +70,13 @@
 
         <?php } ?>
         <div class="main-content container-fluid">
-       
         <?php
             $aid=$_GET['emp_id'];
             $ret="select * from orrs_employee where emp_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
-            $stmt->execute() ;
+            $stmt->execute() ;//ok
             $res=$stmt->get_result();
-          
             while($row=$res->fetch_object())
         {
         ?>
@@ -154,15 +152,11 @@
                 </div>
               </div>
             </div>
-       
             <?php }?>
         
         </div>
-        
         <?php include('assets/inc/footer.php');?>
-        
       </div>
-
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
@@ -180,7 +174,6 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
-      
       	App.init();
       	App.formElements();
       });

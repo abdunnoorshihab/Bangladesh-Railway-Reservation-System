@@ -5,7 +5,6 @@
     check_login();
     $aid=$_SESSION['emp_id'];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   

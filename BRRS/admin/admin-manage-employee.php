@@ -5,7 +5,6 @@
   include('assets/inc/checklogin.php');
   check_login();
   $aid=$_SESSION['admin_id'];
-  
 if(isset($_GET['del']))
 {
       $id=intval($_GET['del']);
@@ -25,10 +24,9 @@ if(isset($_GET['del']))
           }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-  <?php include('assets/inc/head.php');?>
+  <?php include('assets/inc/head.php');?> 
   <body>
     <div class="be-wrapper be-fixed-sidebar">
       <?php include('assets/inc/navbar.php');?>
@@ -45,7 +43,6 @@ if(isset($_GET['del']))
           </nav>
         </div>
         <?php if(isset($succ)) {?>
-                               
                 <script>
                             setTimeout(function () 
                             { 
@@ -53,6 +50,7 @@ if(isset($_GET['del']))
                             },
                                 100);
                 </script>
+
         <?php } ?>
         <?php if(isset($err)) {?>
                 <script>
@@ -90,9 +88,9 @@ if(isset($_GET['del']))
                     </thead>
                     <tbody>
                     <?php
-                        $ret="SELECT * FROM orrs_employee"; 
+                        $ret="SELECT * FROM orrs_employee";
                         $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;
+                        $stmt->execute() ;//ok
                         $res=$stmt->get_result();
                         $cnt=1;
                         while($row=$res->fetch_object())

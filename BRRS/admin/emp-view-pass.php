@@ -1,4 +1,4 @@
-
+ <!--Server side code to handle passenger sign up-->
  <?php
 	session_start();
 	include('assets/inc/config.php');
@@ -6,18 +6,24 @@
 		{
             $pass_id = $_GET['pass_id'];            
 			$pass_fname=$_POST['pass_fname'];
-	
+			#$mname=$_POST['mname'];
 			$pass_lname=$_POST['pass_lname'];
 			$pass_phone=$_POST['pass_phone'];
 			$pass_addr=$_POST['pass_addr'];
 			$pass_uname=$_POST['pass_uname'];
 			$pass_email=$_POST['pass_email'];
-
+			//$pass_pwd=sha1(md5($_POST['pass_pwd']));
+            //sql to insert captured values
 			$query="update orrs_passenger  set  pass_fname=?, pass_lname=?, pass_phone=?, pass_addr=?, pass_uname=?, pass_email=? where pass_id = ?";
 			$stmt = $mysqli->prepare($query);
 			$rc=$stmt->bind_param('ssssssi',$pass_fname, $pass_lname, $pass_phone, $pass_addr, $pass_uname, $pass_email, $pass_id);
 			$stmt->execute();
-
+			/*
+			*Use Sweet Alerts Instead Of This Fucked Up Javascript Alerts
+			*echo"<script>alert('Successfully Created Account Proceed To Log In ');</script>";
+			*/ 
+			//declare a varible which will be passed to alert function
+			if($stmt)
 			{
 				$success = "Passenger Account Updated";
 			}
@@ -28,20 +34,22 @@
 			
 		}
 ?>
-
+<!--End Server Side-->
 
 <!DOCTYPE html>
 <html lang="en">
-
+<!--Head-->
 <?php include('assets/inc/head.php');?>
-
+<!--End Head-->
   <body>
     <div class="be-wrapper be-fixed-sidebar ">
-
+    <!--Navigation Bar-->
       <?php include('assets/inc/navbar.php');?>
+      <!--End Navigation Bar-->
 
+      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
-
+      <!--End Sidebar-->
       <div class="be-content">
         <div class="page-head">
           <h2 class="page-head-title">Passenger Details</h2>
@@ -54,6 +62,7 @@
           </nav>
         </div>
             <?php if(isset($success)) {?>
+                                <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -64,6 +73,7 @@
 
         <?php } ?>
         <?php if(isset($err)) {?>
+        <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -74,15 +84,16 @@
 
         <?php } ?>
         <div class="main-content container-fluid">
-
+       
+       <!--Train Details forms-->
        <?php
             $aid=$_GET['pass_id'];
             $ret="select * from orrs_passenger where pass_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
-            $stmt->execute() ;
+            $stmt->execute() ;//ok
             $res=$stmt->get_result();
-
+            //$cnt=1;
             while($row=$res->fetch_object())
         {
         ?>
@@ -115,9 +126,14 @@
                 </div>
               </div>
             </div>
+       
+        
         </div>
+        <!--footer-->
         <?php include('assets/inc/footer.php');?>
+        <!--EndFooter-->
       </div>
+
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
@@ -133,6 +149,7 @@
     <script src="assets/lib/bs-custom-file-input/bs-custom-file-input.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
+      	//-initialize the javascript
       	App.init();
       	App.formElements();
       });

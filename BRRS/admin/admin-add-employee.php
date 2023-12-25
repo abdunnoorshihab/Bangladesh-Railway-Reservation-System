@@ -1,4 +1,4 @@
-
+ 
  <?php
 	session_start();
 	include('assets/inc/config.php');
@@ -31,11 +31,16 @@
 			
 		}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <?php include('assets/inc/head.php');?>
+
   <body>
     <div class="be-wrapper be-fixed-sidebar ">
+   
       <?php include('assets/inc/navbar.php');?>
       <?php include('assets/inc/sidebar.php');?>
       <div class="be-content">
@@ -146,7 +151,6 @@
         </div>
         <?php include('assets/inc/footer.php');?>
       </div>
-
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>

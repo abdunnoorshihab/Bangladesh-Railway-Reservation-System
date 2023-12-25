@@ -5,12 +5,14 @@
 		if(isset($_POST['Create_Profile']))
 		{
 			$pass_fname=$_POST['pass_fname'];
+
 			$pass_lname=$_POST['pass_lname'];
 			$pass_phone=$_POST['pass_phone'];
 			$pass_addr=$_POST['pass_addr'];
 			$pass_uname=$_POST['pass_uname'];
 			$pass_email=$_POST['pass_email'];
 			$pass_pwd=sha1(md5($_POST['pass_pwd']));
+
 			$query="insert into orrs_passenger (pass_fname, pass_lname, pass_phone, pass_addr, pass_uname, pass_email, pass_pwd) values(?,?,?,?,?,?,?)";
 			$stmt = $mysqli->prepare($query);
 			$rc=$stmt->bind_param('sssssss',$pass_fname, $pass_lname, $pass_phone, $pass_addr, $pass_uname, $pass_email, $pass_pwd);
@@ -26,9 +28,11 @@
 			
 		}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include('assets/inc/head.php');?>
+
   <body>
     <div class="be-wrapper be-fixed-sidebar ">
       <?php include('assets/inc/navbar.php');?>

@@ -1,42 +1,52 @@
 <?php
     session_start();
     include('assets/inc/config.php');
+    //date_default_timezone_set('Africa /Nairobi');
     include('assets/inc/checklogin.php');
     check_login();
     $aid=$_SESSION['emp_id'];
     if(isset($_POST['update_train']))
     {
-        $id = $_GET['id'];
-        $name = $_POST['name'];
-        $route = $_POST['route'];
-        $current = $_POST['current'];
-        $destination = $_POST['destination'];
-        $time = $_POST['time'];
-        $number = $_POST['number'];
-        $fare = $_POST['fare'];
-        $passengers = $_POST['passengers'];
-        $query="update orrs_train set name= ?, route = ?, current = ?, destination = ?, time = ?, number = ?, fare = ?, passengers = ? where id = ?";
-        $stmt = $mysqli->prepare($query);
-        $rc=$stmt->bind_param('ssssssssi', $name, $route, $current, $destination, $time, $number, $fare, $passengers, $id);
-        $stmt->execute();
-        if($stmt)
-        {
-            $succ = "Train Updated";
-        }
-        else 
-        {
-            $err = "Please Try Again Later";
-        }
-    }
+            $id = $_GET['id'];
+            $name = $_POST['name'];
+            $route = $_POST['route'];
+            $current = $_POST['current'];
+            $destination = $_POST['destination'];
+            $time = $_POST['time'];
+            $number = $_POST['number'];
+            $fare = $_POST['fare'];
+            $passengers = $_POST['passengers'];
+            //sql querry to post the entered information
+            $query="update orrs_train set name= ?, route = ?, current = ?, destination = ?, time = ?, number = ?, fare = ?, passengers = ? where id = ?";
+            $stmt = $mysqli->prepare($query);
+            //bind this parameters
+            $rc=$stmt->bind_param('ssssssssi', $name, $route, $current, $destination, $time, $number, $fare, $passengers, $id);
+            $stmt->execute();
+                if($stmt)
+                {
+                    $succ = "Train Updated";
+                }
+                else 
+                {
+                    $err = "Please Try Again Later";
+                }
+            #echo"<script>alert('Your Profile Has Been Updated Successfully');</script>";
+            }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<!--Head-->
 <?php include('assets/inc/head.php');?>
-<body>
+<!--End Head-->
+  <body>
     <div class="be-wrapper be-fixed-sidebar ">
+    <!--Navigation Bar-->
       <?php include('assets/inc/navbar.php');?>
-      <?php include('assets/inc/sidebar.php');?>
+      <!--End Navigation Bar-->
 
+      <!--Sidebar-->
+      <?php include('assets/inc/sidebar.php');?>
+      <!--End Sidebar-->
       <div class="be-content">
         <div class="page-head">
           <h2 class="page-head-title">Update Train Details</h2>
@@ -48,32 +58,38 @@
             </ol>
           </nav>
         </div>
-        <?php if(isset($succ)) {?>
-            <script>
-                setTimeout(function () 
-                { 
-                    swal("Success!","<?php echo $succ;?>!","success");
-                },
-                100);
-            </script>
+            <?php if(isset($succ)) {?>
+                                <!--This code for injecting an alert-->
+                <script>
+                            setTimeout(function () 
+                            { 
+                                swal("Success!","<?php echo $succ;?>!","success");
+                            },
+                                100);
+                </script>
+
         <?php } ?>
         <?php if(isset($err)) {?>
-            <script>
-                setTimeout(function () 
-                { 
-                    swal("Failed!","<?php echo $err;?>!","Failed");
-                },
-                100);
-            </script>
+        <!--This code for injecting an alert-->
+                <script>
+                            setTimeout(function () 
+                            { 
+                                swal("Failed!","<?php echo $err;?>!","Failed");
+                            },
+                                100);
+                </script>
+
         <?php } ?>
         <div class="main-content container-fluid">
+       <!--Train Details forms-->
        <?php
             $aid=$_GET['id'];
             $ret="select * from orrs_train where id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
-            $stmt->execute() ;
+            $stmt->execute() ;//ok
             $res=$stmt->get_result();
+            //$cnt=1;
             while($row=$res->fetch_object())
         {
         ?>
@@ -131,6 +147,7 @@
                         <input class="form-control" name="fare" value = "<?php echo $row->fare;?>"  id="inputText3" type="text">
                       </div>
                     </div>
+                    
                     <div class="col-sm-6">
                         <p class="text-right">
                           <input class="btn btn-space btn-success" value ="Update Train" name = "update_train" type="submit">
@@ -142,10 +159,16 @@
                 </div>
               </div>
             </div>
+       
+        <!--End Train Instance-->
         <?php }?>
+        
         </div>
+        <!--footer-->
         <?php include('assets/inc/footer.php');?>
+        <!--EndFooter-->
       </div>
+
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
@@ -161,9 +184,11 @@
     <script src="assets/lib/bs-custom-file-input/bs-custom-file-input.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
+      	//-initialize the javascript
       	App.init();
       	App.formElements();
       });
     </script>
   </body>
+
 </html>

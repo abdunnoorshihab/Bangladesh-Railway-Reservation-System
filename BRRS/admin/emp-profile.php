@@ -8,23 +8,34 @@
 
 <!DOCTYPE html>
 <html lang="en">
+  <!--Head-->
+  
   <?php include('assets/inc/head.php');?>
+  <!--End Head-->
   <body>
+
+
     <div class="be-wrapper be-fixed-sidebar">
+    <!--Navigation Bar-->
       <?php include("assets/inc/navbar.php");?>
-      <?php include('assets/inc/sidebar.php');?>
-      
-      <?php
-        $aid=$_SESSION['admin_id'];
-        $ret="select * from orrs_admin where admin_id=?"; 
-        $stmt= $mysqli->prepare($ret) ;
-        $stmt->bind_param('i',$aid);
-        $stmt->execute() ;
-        $res=$stmt->get_result();
-        
-        while($row=$res->fetch_object())
+      <!--End Naigation Bar-->
+      <!--Sidebar-->
+        <?php include('assets/inc/sidebar.php');?>
+      <!--End Sidebar-->
+
+        <!--Server Side Scrit To Fetch all details of logged in user-->
+        <?php
+            $aid=$_SESSION['admin_id'];//Assaign session variable to  ID
+            $ret="select * from orrs_admin where admin_id=?"; 
+            $stmt= $mysqli->prepare($ret) ;
+            $stmt->bind_param('i',$aid);
+            $stmt->execute() ;//ok
+            $res=$stmt->get_result();
+            //$cnt=1;
+        while($row=$res->fetch_object()) //Display all passenger details
         {
-      ?>
+        ?>
+        <!--End Server Side Script-->
       <div class="be-content">
         <div class="main-content container-fluid">
           <div class="user-profile">
@@ -38,15 +49,19 @@
                       <div class="name"><?php echo $row->admin_fname;?> <?php echo $row->admin_lname;?> </div>
                       <div class="nick"><span class="mdi mdi-account"></span><?php echo $row->admin_uname;?></div>
                     </div>
+                    
                   </div>
                 </div>
+                
               </div>
-            </div>
-            <?php include('assets/inc/footer.php');?>
           </div>
+          <!--footer-->
+        <?php include('assets/inc/footer.php');?>
+        <!--EndFooter-->
         </div>
       </div>
-      <?php } ?>
+    <?php }?>
+     
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
@@ -62,9 +77,11 @@
     <script src="assets/lib/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-        App.init();
-        App.pageProfile();
+      	//-initialize the javascript
+      	App.init();
+      	App.pageProfile();
       });
     </script>
   </body>
+
 </html>
