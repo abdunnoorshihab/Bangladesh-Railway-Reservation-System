@@ -1,11 +1,11 @@
-<!--Start Server side code to give us and hold session-->
+
 <?php
   session_start();
   include('assets/inc/config.php');
   include('assets/inc/checklogin.php');
   check_login();
   $aid=$_SESSION['admin_id'];
-  //delete or remove library user  php code
+  
 if(isset($_GET['del']))
 {
       $id=intval($_GET['del']);
@@ -25,21 +25,14 @@ if(isset($_GET['del']))
           }
 }
 ?>
-<!--End Server side scriptiing-->
+
 <!DOCTYPE html>
 <html lang="en">
-<!--HeAD-->
   <?php include('assets/inc/head.php');?>
- <!-- end HEAD--> 
   <body>
     <div class="be-wrapper be-fixed-sidebar">
-    <!--navbar-->
       <?php include('assets/inc/navbar.php');?>
-      <!--End navbar-->
-      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
-
       <div class="be-content">
       <div class="page-head">
           <h2 class="page-head-title">Manage Employees</h2>
@@ -52,7 +45,7 @@ if(isset($_GET['del']))
           </nav>
         </div>
         <?php if(isset($succ)) {?>
-                                <!--This code for injecting an alert-->
+                               
                 <script>
                             setTimeout(function () 
                             { 
@@ -60,10 +53,8 @@ if(isset($_GET['del']))
                             },
                                 100);
                 </script>
-
         <?php } ?>
         <?php if(isset($err)) {?>
-        <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -99,12 +90,9 @@ if(isset($_GET['del']))
                     </thead>
                     <tbody>
                     <?php
-                        /*
-                        *Lets get details of available trains!!
-                        */
-                        $ret="SELECT * FROM orrs_employee"; //sql code to get all details of trains.
+                        $ret="SELECT * FROM orrs_employee"; 
                         $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;//ok
+                        $stmt->execute() ;
                         $res=$stmt->get_result();
                         $cnt=1;
                         while($row=$res->fetch_object())
@@ -128,10 +116,7 @@ if(isset($_GET['del']))
               </div>
             </div>
           </div>
-         
-         <!--footer-->
          <?php include('assets/inc/footer.php');?>
-         <!--End Footer-->
         </div>
       </div>
      
@@ -155,7 +140,6 @@ if(isset($_GET['del']))
     <script src="assets/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
       	App.init();
       	App.dataTables();
       });

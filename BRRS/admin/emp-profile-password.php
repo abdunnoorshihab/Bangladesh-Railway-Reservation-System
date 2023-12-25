@@ -1,61 +1,38 @@
 <?php
     session_start();
     include('assets/inc/config.php');
-    //date_default_timezone_set('Africa /Nairobi');
     include('assets/inc/checklogin.php');
     check_login();
     $aid=$_SESSION['admin_id'];
 
-            if(isset($_POST['Update_Password']))
-
-    {
-           /*
-            $pass_fname=$_POST['pass_fname'];
-            $pass_lname = $_POST['pass_lname'];
-            $pass_phone=$_POST['pass_phone'];
-            $pass_addr=$_POST['pass_addr'];
-            $pass_email=$_POST['pass_email'];
-            $pass_uname=$_POST['pass_uname'];
-            $pass_bday=$_POST['pass_bday'];
-            //$pass_ocupation=$_POST['pass_occupation'];
-            $pass_bio=($_POST['pass_bio']);
-           
-            //$date = date('d-m-Y h:i:s', time());
-             $pass_dpic=$_FILES["pass_dpic"]["name"];
-		    //$id=intval($_GET['id']);
-		    move_uploaded_file($_FILES["pass_dpic"]["tmp_name"],"assets/img/profile/".$_FILES["pass_dpic"]["name"]);
-            */
-            //  $aid=$_SESSION['emp_id'];
-            $admin_pwd=sha1(md5($_POST['admin_pwd']));
-            $query="update orrs_admin set admin_pwd = ? where admin_id=?";
-            $stmt = $mysqli->prepare($query);
-            $rc=$stmt->bind_param('si', $admin_pwd, $aid);
-            $stmt->execute();
-                if($stmt)
-                {
-                    $succ1 = "Password  Updated";
-                }
-                else 
-                {
-                    $err = "Please Try Again Later";
-                }
-            #echo"<script>alert('Your Profile Has Been Updated Successfully');</script>";
-            }
+    if(isset($_POST['Update_Password']))
+    {  
+        $admin_pwd=sha1(md5($_POST['admin_pwd']));
+        $query="update orrs_admin set admin_pwd = ? where admin_id=?";
+        $stmt = $mysqli->prepare($query);
+        $rc=$stmt->bind_param('si', $admin_pwd, $aid);
+        $stmt->execute();
+        
+        if($stmt)
+        {
+            $succ1 = "Password  Updated";
+        }
+        else 
+        {
+            $err = "Please Try Again Later";
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-<!--Head-->
-<?php include('assets/inc/head.php');?>
-<!--End Head-->
+
+  <?php include('assets/inc/head.php');?>
+
   <body>
     <div class="be-wrapper be-fixed-sidebar ">
-    <!--Navigation Bar-->
       <?php include('assets/inc/navbar.php');?>
-      <!--End Navigation Bar-->
-
-      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
       <div class="be-content">
         <div class="page-head">
           <h2 class="page-head-title">Change Password </h2>
@@ -67,40 +44,38 @@
             </ol>
           </nav>
         </div>
+        
         <?php if(isset($succ1)) {?>
-                                <!--This code for injecting an alert-->
-                <script>
-                            setTimeout(function () 
-                            { 
-                                swal("Success!","<?php echo $succ1;?>!","success");
-                            },
-                                100);
-                </script>
-
+          <script>
+            setTimeout(function () 
+            { 
+                swal("Success!","<?php echo $succ1;?>!","success");
+            },
+              100);
+          </script>
         <?php } ?>
+        
         <?php if(isset($err)) {?>
-        <!--This code for injecting an alert-->
-                <script>
-                            setTimeout(function () 
-                            { 
-                                swal("Failed!","<?php echo $err;?>!","Failed");
-                            },
-                                100);
-                </script>
-
+          <script>
+            setTimeout(function () 
+            { 
+                swal("Failed!","<?php echo $err;?>!","Failed");
+            },
+              100);
+          </script>
         <?php } ?>
+
         <div class="main-content container-fluid">
-        <?php
+          <?php
             $aid=$_SESSION['admin_id'];
             $ret="select * from orrs_admin where admin_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
-            $stmt->execute() ;//ok
+            $stmt->execute();
             $res=$stmt->get_result();
-            //$cnt=1;
             while($row=$res->fetch_object())
-        {
-        ?>     
+            {
+          ?>     
             <div class="col-md-12">
               <div class="card card-border-color card-border-color-success">
                 <div class="card-header card-header-divider">Change Password<span class="card-subtitle">Fill All Details</span></div>
@@ -125,26 +100,22 @@
                       </div>
                     </div>
                     <div class="col-sm-6">
-                        <p class="text-right">
-                          <input class="btn btn-space btn-success" value ="Change Password" name = "Update_Password" type="submit">
-                          <button class="btn btn-space btn-danger">Cancel</button>
-                        </p>
-                      </div>
+                      <p class="text-right">
+                        <input class="btn btn-space btn-success" value ="Change Password" name = "Update_Password" type="submit">
+                        <button class="btn btn-space btn-danger">Cancel</button>
+                      </p>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
+          </div>
+          <?php } ?>
         </div>
-       
-        <?php }?>
-        
+        <?php include('assets/inc/footer.php');?>
       </div>
-      <!--footer-->
-      <?php include('assets/inc/footer.php');?>
-        <!--EndFooter-->
-
     </div>
+
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
     <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
@@ -159,7 +130,6 @@
     <script src="assets/lib/bs-custom-file-input/bs-custom-file-input.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
       	App.init();
       	App.formElements();
       });

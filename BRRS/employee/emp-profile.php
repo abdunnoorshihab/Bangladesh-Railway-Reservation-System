@@ -8,34 +8,25 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <!--Head-->
   
   <?php include('assets/inc/head.php');?>
-  <!--End Head-->
   <body>
-
-
     <div class="be-wrapper be-fixed-sidebar">
-    <!--Navigation Bar-->
       <?php include("assets/inc/navbar.php");?>
-      <!--End Naigation Bar-->
-      <!--Sidebar-->
         <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
 
-        <!--Server Side Scrit To Fetch all details of logged in user-->
         <?php
-            $aid=$_SESSION['emp_id'];//Assaign session variable to passenger ID
-            $ret="select * from orrs_employee where emp_id=?"; //sELECT ALL FROM PASSENGERS WHERE PASSENGER ID IS THE LOGGED ONE
+            $aid=$_SESSION['emp_id'];D
+            $ret="select * from orrs_employee where emp_id=?"; 
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
-            $stmt->execute() ;//ok
+            $stmt->execute() ;
             $res=$stmt->get_result();
-            //$cnt=1;
-        while($row=$res->fetch_object()) //Display all passenger details
+            
+        while($row=$res->fetch_object()) 
         {
         ?>
-        <!--End Server Side Script-->
+        
       <div class="be-content">
         <div class="main-content container-fluid">
           <div class="user-profile">
@@ -73,9 +64,7 @@
                 </div>
               </div>
           </div>
-          <!--footer-->
         <?php include('assets/inc/footer.php');?>
-        <!--EndFooter-->
         </div>
       </div>
     <?php }?>
@@ -95,7 +84,6 @@
     <script src="assets/lib/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
       	App.init();
       	App.pageProfile();
       });

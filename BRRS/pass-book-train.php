@@ -1,4 +1,4 @@
-<!--Start Server side code to give us and hold session-->
+
 <?php
   session_start();
   include('assets/inc/config.php');
@@ -6,20 +6,19 @@
   check_login();
   $aid=$_SESSION['pass_id'];
 ?>
-<!--End Server side scriptiing-->
+
 <!DOCTYPE html>
 <html lang="en">
-<!--HeAD-->
+
   <?php include('assets/inc/head.php');?>
- <!-- end HEAD--> 
+ 
   <body>
     <div class="be-wrapper be-fixed-sidebar">
-    <!--navbar-->
+  
       <?php include('assets/inc/navbar.php');?>
-      <!--End navbar-->
-      <!--Sidebar-->
+   
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
+      
 
       <div class="be-content">
       <div class="page-head">
@@ -55,12 +54,10 @@
                     </thead>
                     <tbody>
                     <?php
-                        /*
-                        *Lets get details of available trains!!
-                        */
-                        $ret="SELECT * FROM orrs_train  "; //sql code to get all details of trains.
+                       
+                        $ret="SELECT * FROM orrs_train  "; 
                         $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;//ok
+                        $stmt->execute() ;
                         $res=$stmt->get_result();
                         $cnt=1;
                         while($row=$res->fetch_object())
@@ -86,9 +83,9 @@
             </div>
           </div>
          
-         <!--footer-->
+      
          <?php include('assets/inc/footer.php');?>
-         <!--End Footer-->
+        
         </div>
       </div>
      
@@ -112,7 +109,7 @@
     <script src="assets/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
+      
       	App.init();
       	App.dataTables();
       });

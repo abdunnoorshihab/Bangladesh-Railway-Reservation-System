@@ -1,27 +1,20 @@
- <!--Server side code to handle passenger sign up-->
+
 <?php
 	session_start();
 	include('assets/inc/config.php');
 		if(isset($_POST['Create_Profile']))
 		{
 			$pass_fname=$_POST['pass_fname'];
-			#$mname=$_POST['mname'];
 			$pass_lname=$_POST['pass_lname'];
 			$pass_phone=$_POST['pass_phone'];
 			$pass_addr=$_POST['pass_addr'];
 			$pass_uname=$_POST['pass_uname'];
 			$pass_email=$_POST['pass_email'];
 			$pass_pwd=sha1(md5($_POST['pass_pwd']));
-      //sql to insert captured values
 			$query="insert into orrs_passenger (pass_fname, pass_lname, pass_phone, pass_addr, pass_uname, pass_email, pass_pwd) values(?,?,?,?,?,?,?)";
 			$stmt = $mysqli->prepare($query);
 			$rc=$stmt->bind_param('sssssss',$pass_fname, $pass_lname, $pass_phone, $pass_addr, $pass_uname, $pass_email, $pass_pwd);
 			$stmt->execute();
-			/*
-			*Use Sweet Alerts Instead Of This Fucked Up Javascript Alerts
-			*echo"<script>alert('Successfully Created Account Proceed To Log In ');</script>";
-			*/ 
-			//declare a varible which will be passed to alert function
 			if($stmt)
 			{
 				$success = "Passenger's Account Has Been Created";
@@ -33,22 +26,13 @@
 			
 		}
 ?>
-<!--End Server Side-->
-
 <!DOCTYPE html>
 <html lang="en">
-<!--Head-->
 <?php include('assets/inc/head.php');?>
-<!--End Head-->
   <body>
     <div class="be-wrapper be-fixed-sidebar ">
-    <!--Navigation Bar-->
       <?php include('assets/inc/navbar.php');?>
-      <!--End Navigation Bar-->
-
-      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
       <div class="be-content">
         <div class="page-head">
           <h2 class="page-head-title">Add Passenger</h2>
@@ -61,7 +45,6 @@
           </nav>
         </div>
             <?php if(isset($success)) {?>
-                                <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -72,7 +55,6 @@
 
         <?php } ?>
         <?php if(isset($err)) {?>
-        <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -144,13 +126,8 @@
                 </div>
               </div>
             </div>
-       
-        
-        
         </div>
-        <!--footer-->
         <?php include('assets/inc/footer.php');?>
-        <!--EndFooter-->
       </div>
 
     </div>
@@ -170,7 +147,6 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
       	App.init();
       	App.formElements();
       });

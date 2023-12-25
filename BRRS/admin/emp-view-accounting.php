@@ -7,20 +7,19 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <!--Head-->
+
   <?php include("assets/inc/head.php");?>
-  <!--End Head-->
+
   <body>
 
     <div class="be-wrapper be-fixed-sidebar">
 
-    <!--Navbar-->
-     <?php include("assets/inc/navbar.php");?>
-      <!--End Nav Bar-->
 
-      <!--Sidebar-->
+     <?php include("assets/inc/navbar.php");?>
+
+
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
+   
 
       <div class="be-content">
         <div class="main-content container-fluid">
@@ -48,7 +47,7 @@
               <div class="chart sparkline"><i class="material-icons">assignment_late</i></div>
                 <div class="data-info">
                 <?php
-                  //code for summing up number of passengers 
+           
                   $result ="SELECT count(*) FROM orrs_train_tickets where confirmation != 'Approved' ";
                   $stmt = $mysqli->prepare($result);
                   $stmt->execute();
@@ -68,7 +67,7 @@
               <div class="chart sparkline"><i class="material-icons">loyalty</i></div>
                 <div class="data-info">
                   <?php
-                    //code for summing up number of trains tickets
+              
                     $result ="SELECT count(*) FROM orrs_train_tickets where confirmation = 'Approved'";
                     $stmt = $mysqli->prepare($result);
                     $stmt->execute();
@@ -87,7 +86,7 @@
             <div class="chart sparkline"><i class="material-icons">rowing</i></div>
               <div class="data-info">
               <?php
-                  //code for summing up number of trains tickets
+             
                   $result ="SELECT count(*) FROM `orrs_train_tickets` ";
                   $stmt = $mysqli->prepare($result);
                   $stmt->execute();
@@ -112,10 +111,10 @@
                   </div>
                 </div>
                 <div class="card-body">
-                <!--Start Chart-->
+             
                 
             <div id="PieChart" style="height: 200px; width: 100%;"></div>
-             <!--COde for geting all details of tickets in the system-->
+         
              <script type="text/javascript">
                     window.onload = function() {
 
@@ -138,7 +137,7 @@
                           yValueFormatString:"#,##0.#"%"",
                           dataPoints: [
                           <?php
-                            //code for getting all approved tickets
+                         
                             $result ="SELECT count(*) FROM  orrs_train_tickets where confirmation = 'Approved' ";
                             $stmt = $mysqli->prepare($result);
                             $stmt->execute();
@@ -146,14 +145,13 @@
                             $stmt->fetch();
                             $stmt->close();
                           
-                            //code for getting all non approved tickets
+                         
                             $result ="SELECT count(*) FROM orrs_train_tickets  where confirmation != 'Approved'";
                             $stmt = $mysqli->prepare($result);
                             $stmt->execute();
                             $stmt->bind_result($not_approved);
                             $stmt->fetch();
                             $stmt->close();
-                            
                             
                           ?>
                           
@@ -178,7 +176,7 @@
 
                   }
                     </script>
-                <!--eND chart-->
+        
                 </div>
               </div>
             </div>
@@ -187,9 +185,9 @@
           
          
         </div>
-        <!--footer-->
+   
         <?php include('assets/inc/footer.php');?>
-        <!--EndFooter-->
+
       </div>
      
     </div>
@@ -198,9 +196,9 @@
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
     <script src="assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js" type="text/javascript"></script>
     <script src="assets/js/app.js" type="text/javascript"></script>
-    <!--Chart js-->
+
     <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-    <!--End chart js-->
+
     <script src="assets/lib/jquery-flot/jquery.flot.js" type="text/javascript"></script>
     <script src="assets/lib/jquery-flot/jquery.flot.pie.js" type="text/javascript"></script>
     <script src="assets/lib/jquery-flot/jquery.flot.time.js" type="text/javascript"></script>
@@ -229,7 +227,6 @@
     
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
       	App.init();
       	App.dashboard();
       

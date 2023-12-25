@@ -1,4 +1,3 @@
-<!--Start Server side code to give us and hold session-->
 <?php
   session_start();
   include('assets/inc/config.php');
@@ -6,24 +5,16 @@
   check_login();
   $aid=$_SESSION['pass_id'];
 ?>
-<!--End Server side scriptiing-->
+
 <!DOCTYPE html>
 <html lang="en">
-<!--HeAD-->
-  <?php include('assets/inc/head.php');?>
- <!-- end HEAD--> 
- <!--Log on to codeastro.com for more projects!-->
+    <?php include('assets/inc/head.php');?>
   <body>
     <div class="be-wrapper be-fixed-sidebar">
-    <!--navbar-->
       <?php include('assets/inc/navbar.php');?>
-      <!--End navbar-->
-      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
-
       <div class="be-content">
-      <div class="page-head">
+        <div class="page-head">
           <h2 class="page-head-title">My Train</h2>
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb page-head-nav">
@@ -39,23 +30,18 @@
               <div class="card card-table">
               
               <?php
-              /**
-               * We need to get firstname or username of logged in user!!
-               */         
                 $aid=$_SESSION['pass_id'];
                 $ret="select * from orrs_passenger where pass_id=?";
                 $stmt= $mysqli->prepare($ret) ;
                 $stmt->bind_param('i',$aid);
-                $stmt->execute() ;//ok
+                $stmt->execute();
                 $res=$stmt->get_result();
-                //$cnt=1;
                 while($row=$res->fetch_object())
                  {
                     ?>
-                <div class="card-header"><?php echo $row->pass_fname;?> <?php echo $row->pass_lname;?>  This Is Your Booked Train!   
-                <?php }?>             
-                </div>
+                <div class="card-header"><?php echo $row->pass_fname;?> <?php echo $row->pass_lname;?>  This Is Your Booked Train!</div>
 
+                <?php }?>
                 <div class="card-body">
                   <table class="table table-striped table-bordered table-hover table-fw-widget" id="table1">
                     <thead class="thead-dark">
@@ -70,27 +56,21 @@
                     </thead>
                     <tbody>
                         <?php
-                        /**
-                         *Lets select train booking details of logged in user using PASSENGER ID as the session
-                         */
-                            //$aid=$_SESSION['pass_id'];
-                            $ret="select * from orrs_passenger where pass_id=?";//sql to get details of our user
+                            $ret="select * from orrs_passenger where pass_id=?";
                             $stmt= $mysqli->prepare($ret) ;
                             $stmt->bind_param('i',$aid);
-                            $stmt->execute() ;//ok
+                            $stmt->execute();
                             $res=$stmt->get_result();
-                            //$cnt=1;
                         while($row=$res->fetch_object())
                         {
                         ?>
-                      <tr class="odd gradeX even gradeC odd gradeA even gradeA ">
+                      <tr class="odd gradeX even gradeC odd gradeA even gradeA">
                         <td><?php echo $row->pass_train_number;?></td>
                         <td><?php echo $row->pass_train_name;?></td>
                         <td class="center"><?php echo $row->pass_dep_station;?></td>
                         <td class="center"><?php echo $row->pass_arr_station;?></td>
                         <td class="center"><?php echo $row->pass_dep_time;?></td>
                         <td class="center">$<?php echo $row->pass_train_fare;?></td>
-                        
                       </tr>
                         <?php }?>
                     </tbody>
@@ -100,13 +80,9 @@
             </div>
           </div>
          
-         <!--footer-->
          <?php include('assets/inc/footer.php');?>
-         <!--End Footer-->
-		 <!--Log on to codeastro.com for more projects!-->
         </div>
       </div>
-     
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
@@ -127,11 +103,9 @@
     <script src="assets/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
-      	App.init();
-      	App.dataTables();
+        App.init();
+        App.dataTables();
       });
     </script>
   </body>
-
 </html>

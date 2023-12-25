@@ -11,8 +11,6 @@
 	<body class="is-preload">
 
 			<div id="page-wrapper">
-
-				<!-- Header -->
 					<header id="header" class="alt">
 						
 						<h1><a href="index.php">Bangladesh Railway</a></h1>
@@ -20,8 +18,6 @@
 							<a href="#menu">Menu</a>
 						</nav>
 					</header>
-
-				<!-- Menu -->
 					<nav id="menu">
 						<div class="inner">
 							<h2>Menu</h2>
@@ -34,8 +30,6 @@
 							<a href="#" class="close">Close</a>
 						</div>
 					</nav>
-
-				<!-- Banner -->
 					<section id="banner">
 						<div class="inner">
 							<img src="images/train 2 (1).png" alt="">
@@ -71,10 +65,7 @@
 							</ul>
 						</div>
 					</section>
-
 			</div>
-
-		<!-- Scripts -->
 			<script src="includes/js/jquery.min.js"></script>
 			<script src="includes/js/jquery.scrollex.min.js"></script>
 			<script src="includes/js/browser.min.js"></script>

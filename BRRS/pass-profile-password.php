@@ -1,7 +1,7 @@
 <?php
     session_start();
     include('assets/inc/config.php');
-    //date_default_timezone_set('Africa /Nairobi');
+    
     include('assets/inc/checklogin.php');
     check_login();
     $aid=$_SESSION['pass_id'];
@@ -9,22 +9,7 @@
             if(isset($_POST['Update_Password']))
 
     {
-           /*
-            $pass_fname=$_POST['pass_fname'];
-            $pass_lname = $_POST['pass_lname'];
-            $pass_phone=$_POST['pass_phone'];
-            $pass_addr=$_POST['pass_addr'];
-            $pass_email=$_POST['pass_email'];
-            $pass_uname=$_POST['pass_uname'];
-            $pass_bday=$_POST['pass_bday'];
-            //$pass_ocupation=$_POST['pass_occupation'];
-            $pass_bio=($_POST['pass_bio']);
-           
-            //$date = date('d-m-Y h:i:s', time());
-             $pass_dpic=$_FILES["pass_dpic"]["name"];
-		    //$id=intval($_GET['id']);
-		    move_uploaded_file($_FILES["pass_dpic"]["tmp_name"],"assets/img/profile/".$_FILES["pass_dpic"]["name"]);
-            */
+          
             $aid=$_SESSION['pass_id'];
             $pass_pwd=sha1(md5($_POST['pass_pwd']));
             $query="update  orrs_passenger set pass_pwd = ? where pass_id=?";
@@ -39,23 +24,21 @@
                 {
                     $err = "Please Try Again Later";
                 }
-            #echo"<script>alert('Your Profile Has Been Updated Successfully');</script>";
+            
             }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<!--Head-->
+
 <?php include('assets/inc/head.php');?>
-<!--End Head-->
+
   <body>
     <div class="be-wrapper be-fixed-sidebar ">
-    <!--Navigation Bar-->
+    
       <?php include('assets/inc/navbar.php');?>
-      <!--End Navigation Bar-->
-
-      <!--Sidebar-->
+     
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
+      
       <div class="be-content">
         <div class="page-head">
           <h2 class="page-head-title">Change Password </h2>
@@ -68,7 +51,7 @@
           </nav>
         </div>
         <?php if(isset($succ1)) {?>
-                                <!--This code for injecting an alert-->
+                               
                 <script>
                             setTimeout(function () 
                             { 
@@ -79,7 +62,7 @@
 
         <?php } ?>
         <?php if(isset($err)) {?>
-        <!--This code for injecting an alert-->
+        
                 <script>
                             setTimeout(function () 
                             { 
@@ -95,9 +78,9 @@
             $ret="select * from orrs_passenger where pass_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
-            $stmt->execute() ;//ok
+            $stmt->execute() ;
             $res=$stmt->get_result();
-            //$cnt=1;
+      
             while($row=$res->fetch_object())
         {
         ?>     
@@ -140,9 +123,9 @@
         <?php }?>
         
       </div>
-      <!--footer-->
+  
       <?php include('assets/inc/footer.php');?>
-        <!--EndFooter-->
+    
 
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
@@ -159,7 +142,7 @@
     <script src="assets/lib/bs-custom-file-input/bs-custom-file-input.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
+      	
       	App.init();
       	App.formElements();
       });

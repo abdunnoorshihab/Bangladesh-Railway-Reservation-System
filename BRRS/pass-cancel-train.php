@@ -1,4 +1,4 @@
-<!--Start Server side code to give us and hold session-->
+
 <?php
   session_start();
   include('assets/inc/config.php');
@@ -6,21 +6,19 @@
   check_login();
   $aid=$_SESSION['pass_id'];
 ?>
-<!--End Server side scriptiing-->
-<!--Log on to codeastro.com for more projects!-->
+
 <!DOCTYPE html>
 <html lang="en">
-<!--HeAD-->
+
   <?php include('assets/inc/head.php');?>
- <!-- end HEAD--> 
+ 
   <body>
     <div class="be-wrapper be-fixed-sidebar">
-    <!--navbar-->
+  
       <?php include('assets/inc/navbar.php');?>
-      <!--End navbar-->
-      <!--Sidebar-->
+
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
+      
 
       <div class="be-content">
       <div class="page-head">
@@ -33,7 +31,7 @@
             </ol>
           </nav>
         </div>
-		<!--Log on to codeastro.com for more projects!-->
+		
         <div class="main-content container-fluid">
           <div class="row">
             <div class="col-sm-12">
@@ -55,16 +53,14 @@
                     </thead>
                     <tbody>
                         <?php
-                        /**
-                         *Lets select train booking details of logged in user using PASSENGER ID as the session
-                         */
+                        
                             $aid=$_SESSION['pass_id'];
-                            $ret="select * from orrs_passenger where pass_id=?";//sql to get details of our user
+                            $ret="select * from orrs_passenger where pass_id=?";
                             $stmt= $mysqli->prepare($ret) ;
                             $stmt->bind_param('i',$aid);
-                            $stmt->execute() ;//ok
+                            $stmt->execute() ;
                             $res=$stmt->get_result();
-                            //$cnt=1;
+                        
                         while($row=$res->fetch_object())
                         {
                         ?>
@@ -86,10 +82,9 @@
               </div>
             </div>
           </div>
-         <!--Log on to codeastro.com for more projects!-->
-         <!--footer-->
+         
          <?php include('assets/inc/footer.php');?>
-         <!--End Footer-->
+         
         </div>
       </div>
      
@@ -113,7 +108,7 @@
     <script src="assets/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
+      	
       	App.init();
       	App.dataTables();
       });

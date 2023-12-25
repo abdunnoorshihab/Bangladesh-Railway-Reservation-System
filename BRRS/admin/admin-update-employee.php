@@ -1,4 +1,4 @@
- <!--Server side code to handle passenger sign up-->
+
  <?php
 	session_start();
 	include('assets/inc/config.php');
@@ -6,7 +6,6 @@
 		{
             $emp_id = $_GET['emp_id'];
             $emp_fname=$_POST['emp_fname'];
-            #$mname=$_POST['mname'];
             $emp_lname=$_POST['emp_lname'];
             $emp_nat_idno=$_POST['emp_nat_idno'];
             $emp_phone=$_POST['emp_phone'];
@@ -15,16 +14,11 @@
             $emp_email=$_POST['emp_email'];
             $emp_dept=$_POST['emp_dept'];
             $emp_pwd=sha1(md5($_POST['emp_pwd']));
-      //sql to insert captured values
 			$query="update orrs_employee set emp_fname=?, emp_lname=?, emp_phone=?, emp_addr=?, emp_nat_idno=?, emp_uname=?, emp_email=?, emp_dept=?, emp_pwd=? where emp_id=? ";
 			$stmt = $mysqli->prepare($query);
 			$rc=$stmt->bind_param('sssssssssi',$emp_fname, $emp_lname, $emp_phone, $emp_addr, $emp_nat_idno, $emp_uname, $emp_email, $emp_dept, $emp_pwd, $emp_id);
 			$stmt->execute();
-			/*
-			*Use Sweet Alerts Instead Of This Fucked Up Javascript Alerts
-			*echo"<script>alert('Successfully Created Account Proceed To Log In ');</script>";
-			*/ 
-			//declare a varible which will be passed to alert function
+
 			if($stmt)
 			{
 				$success = "Employee  Account Updated";
@@ -32,26 +26,16 @@
 			else {
 				$err = "Please Try Again Or Try Later";
 			}
-			
-			
 		}
 ?>
-<!--End Server Side-->
-
 <!DOCTYPE html>
 <html lang="en">
-<!--Head-->
 <?php include('assets/inc/head.php');?>
-<!--End Head-->
   <body>
     <div class="be-wrapper be-fixed-sidebar ">
-    <!--Navigation Bar-->
+ 
       <?php include('assets/inc/navbar.php');?>
-      <!--End Navigation Bar-->
-
-      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
       <div class="be-content">
         <div class="page-head">
           <h2 class="page-head-title">Update Employee</h2>
@@ -64,7 +48,7 @@
           </nav>
         </div>
             <?php if(isset($success)) {?>
-                                <!--This code for injecting an alert-->
+              
                 <script>
                             setTimeout(function () 
                             { 
@@ -75,7 +59,7 @@
 
         <?php } ?>
         <?php if(isset($err)) {?>
-        <!--This code for injecting an alert-->
+       
                 <script>
                             setTimeout(function () 
                             { 
@@ -86,15 +70,15 @@
 
         <?php } ?>
         <div class="main-content container-fluid">
-        <!--Employee Instance-->
+       
         <?php
             $aid=$_GET['emp_id'];
             $ret="select * from orrs_employee where emp_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
-            $stmt->execute() ;//ok
+            $stmt->execute() ;
             $res=$stmt->get_result();
-            //$cnt=1;
+          
             while($row=$res->fetch_object())
         {
         ?>
@@ -170,13 +154,13 @@
                 </div>
               </div>
             </div>
-        <!--End Employee Instance-->
+       
             <?php }?>
         
         </div>
-        <!--footer-->
+        
         <?php include('assets/inc/footer.php');?>
-        <!--EndFooter-->
+        
       </div>
 
     </div>
@@ -196,7 +180,7 @@
 
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
+      
       	App.init();
       	App.formElements();
       });

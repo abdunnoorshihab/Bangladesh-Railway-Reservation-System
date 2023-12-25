@@ -1,4 +1,4 @@
-<!--Server side scripting  code to hold  user session-->
+
 <?php
   session_start();
   include('assets/inc/config.php');
@@ -6,20 +6,19 @@
   check_login();
   $aid=$_SESSION['pass_id'];
 ?>
-<!--End server side code-->
+
 <!DOCTYPE html>
 <html lang="en">
-  <!--Head-->
+
     <?php include('assets/inc/head.php');?>
-  <!--End Head-->
+  
   <body>
     <div class="be-wrapper be-fixed-sidebar">
-    <!--Navbar-->
+    
       <?php include("assets/inc/navbar.php");?>
-      <!--End Navbar-->
-        <!--Navbar-->
+  
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
+      
 
       <div class="be-content">
         <div class="page-head">
@@ -58,7 +57,7 @@
           
                         $ret="SELECT * FROM orrs_train ";
                         $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;//ok
+                        $stmt->execute() ;
                         $res=$stmt->get_result();
                         $cnt=1;
                         while($row=$res->fetch_object())
@@ -85,9 +84,9 @@
           </div>
         </div>
       </div>
-      <!--Footer-->
+      
       <?php include('assets/inc/footer.php');?>
-      <!--End Footer-->
+      
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
@@ -95,7 +94,7 @@
     <script src="assets/js/app.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
+    
       	App.init();
       });
       

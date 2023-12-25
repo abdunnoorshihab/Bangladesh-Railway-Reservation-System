@@ -1,4 +1,4 @@
-<!--Start Server side code to give us and hold session-->
+
 <?php
   session_start();
   include('assets/inc/config.php');
@@ -6,23 +6,16 @@
   check_login();
   $aid=$_SESSION['pass_id'];
 ?>
-<!--End Server side scriptiing-->
+
 <!DOCTYPE html>
 <html lang="en">
-<!--HeAD-->
   <?php include('assets/inc/head.php');?>
- <!-- end HEAD--> 
   <body>
     <div class="be-wrapper be-fixed-sidebar">
-    <!--navbar-->
       <?php include('assets/inc/navbar.php');?>
-      <!--End navbar-->
-      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
-
       <div class="be-content">
-      <div class="page-head">
+        <div class="page-head">
           <h2 class="page-head-title">Confirm Checkout Tickets</h2>
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb page-head-nav">
@@ -32,30 +25,23 @@
             </ol>
           </nav>
         </div>
-
         <div class="main-content container-fluid">
           <div class="row">
             <div class="col-sm-12">
               <div class="card card-table">
-              
-              <?php
-              /**
-               * We need to get firstname or username of logged in user!!
-               */         
-                $aid=$_SESSION['pass_id'];
-                $ret="select * from orrs_passenger where pass_id=?";
-                $stmt= $mysqli->prepare($ret) ;
-                $stmt->bind_param('i',$aid);
-                $stmt->execute() ;//ok
-                $res=$stmt->get_result();
-                //$cnt=1;
-                while($row=$res->fetch_object())
-                 {
-                    ?>
-                <div class="card-header"><?php echo $row->pass_fname;?> <?php echo $row->pass_lname;?>  This Is Your Booked Train Ticket Proceed to Confirm checkout your ticket!   
-                <?php }?>             
+                <?php
+                  $aid=$_SESSION['pass_id'];
+                  $ret="select * from orrs_passenger where pass_id=?";
+                  $stmt= $mysqli->prepare($ret) ;
+                  $stmt->bind_param('i',$aid);
+                  $stmt->execute();
+                  $res=$stmt->get_result();
+                  while($row=$res->fetch_object())
+                  {
+                ?>
+                <div class="card-header"><?php echo $row->pass_fname;?> <?php echo $row->pass_lname;?>  This Is Your Booked Train Ticket Proceed to Confirm checkout your ticket!
+                <?php }?>
                 </div>
-
                 <div class="card-body">
                   <table class="table table-striped table-bordered table-hover table-fw-widget" id="table1">
                     <thead class="thead-dark">
@@ -72,16 +58,11 @@
                     </thead>
                     <tbody>
                         <?php
-                        /**
-                         *Lets select train booking details of logged in user using PASSENGER ID as the session
-                         */
-                            //$aid=$_SESSION['pass_id'];
-                            $ret="SELECT * from orrs_passenger WHERE pass_id=? && pass_fare_payment_code !=''";//sql to get details of our user
-                            $stmt= $mysqli->prepare($ret) ;
+                            $ret="SELECT * from orrs_passenger WHERE pass_id=? && pass_fare_payment_code !=''";
+                            $stmt= $mysqli->prepare($ret);
                             $stmt->bind_param('i',$aid);
-                            $stmt->execute() ;//ok
+                            $stmt->execute();
                             $res=$stmt->get_result();
-                            //$cnt=1;
                         while($row=$res->fetch_object())
                         {
                         ?>
@@ -93,7 +74,7 @@
                         <td class="center"><?php echo $row->pass_dep_time;?></td>
                         <td class="center">$<?php echo $row->pass_train_fare;?></td>
                         <td class="center"><?php echo $row->pass_fare_payment_code;?></td>
-                        <td class="center"><a href="pass-confirm-checkout-ticket.php?pass_id = <?php echo $row->pass_id;?>"><button class="btn btn-sm btn-success">Confirm Payment</button></a></td>
+                        <td class="center"><a href="pass-confirm-checkout-ticket.php?pass_id=<?php echo $row->pass_id;?>"><button class="btn btn-sm btn-success">Confirm Payment</button></a></td>
                       </tr>
                         <?php }?>
                     </tbody>
@@ -102,13 +83,9 @@
               </div>
             </div>
           </div>
-         
-         <!--footer-->
          <?php include('assets/inc/footer.php');?>
-         <!--End Footer-->
         </div>
       </div>
-     
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
@@ -129,11 +106,10 @@
     <script src="assets/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
+      	
       	App.init();
       	App.dataTables();
       });
     </script>
   </body>
-
 </html>

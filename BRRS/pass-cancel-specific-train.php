@@ -1,36 +1,23 @@
 <?php
     session_start();
     include('assets/inc/config.php');
-    //date_default_timezone_set('Africa /Nairobi');
+    
     include('assets/inc/checklogin.php');
     check_login();
     $aid=$_SESSION['pass_id'];
     if(isset($_POST['Cancel_Train']))
     {
 
-            /*
-            *We have already captured this passenger details....so no need of getting them again.     
-            $pass_fname=$_POST['pass_fname'];
-            $pass_lname = $_POST['pass_lname'];
-            $pass_phone=$_POST['pass_phone'];
-            $pass_addr=$_POST['pass_addr'];
-            $pass_email=$_POST['pass_email'];
-            $pass_uname=$_POST['pass_uname'];
-            $pass_bday=$_POST['pass_bday'];
-            //$pass_ocupation=$_POST['pass_occupation'];
-            $pass_bio=($_POST['pass_bio']);
-            //$passwordconf=md5($_POST['passwordconf']);
-            //$date = date('d-m-Y h:i:s', time());
-            */
+          
             $pass_train_number = $_POST['pass_train_number'];
             $pass_train_name = $_POST['pass_train_name'];
             $pass_dep_station = $_POST['pass_dep_station'];
             $pass_dep_time = $_POST['pass_dep_time'];
             $pass_arr_station = $_POST['pass_arr_station'];
             $pass_train_fare = $_POST['pass_train_fare'];
-            //sql file to update the table of passengers with the new captured information
+            
             $query="update  orrs_passenger set pass_train_number = ?, pass_train_name = ?, pass_dep_station = ?, pass_dep_time = ?,  pass_arr_station = ?, pass_train_fare = ? where pass_id=?";
-            $stmt = $mysqli->prepare($query); //prepare sql and bind it later
+            $stmt = $mysqli->prepare($query); 
             $rc=$stmt->bind_param('ssssssi', $pass_train_number, $pass_train_name, $pass_dep_station, $pass_dep_time, $pass_arr_station, $pass_train_fare, $aid);
             $stmt->execute();
             if($stmt)
@@ -41,23 +28,20 @@
             {
                 $err = "Please Try Again Later";
             }
-            #echo"<script>alert('Your Profile Has Been Updated Successfully');</script>";
+            
             }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<!--Head-->
+
 <?php include('assets/inc/head.php');?>
-<!--End Head-->
   <body>
     <div class="be-wrapper be-fixed-sidebar ">
-    <!--Navigation Bar-->
+    
       <?php include('assets/inc/navbar.php');?>
-      <!--End Navigation Bar-->
-
-      <!--Sidebar-->
+     
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
+
       <div class="be-content">
         <div class="page-head">
           <h2 class="page-head-title">Canel My Train </h2>
@@ -70,7 +54,7 @@
           </nav>
         </div>
             <?php if(isset($succ)) {?>
-                                <!--This code for injecting an alert-->
+                               
                 <script>
                             setTimeout(function () 
                             { 
@@ -81,7 +65,7 @@
 
         <?php } ?>
         <?php if(isset($err)) {?>
-        <!--This code for injecting an alert-->
+        
                 <script>
                             setTimeout(function () 
                             { 
@@ -97,9 +81,9 @@
             $ret="select * from orrs_passenger where pass_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
-            $stmt->execute() ;//ok
+            $stmt->execute() ;
             $res=$stmt->get_result();
-            //$cnt=1;
+          
             while($row=$res->fetch_object())
         {
         ?>
@@ -134,16 +118,15 @@
                       </div>
                     </div>
 
-                    <!--Lets get the details of one single train using its Train Id 
-                    and pass it to this user instance-->
+                    
                     <?php
                         $id=$_GET['pass_id'];
                         $ret="select * from orrs_passenger where pass_id=?";
                         $stmt= $mysqli->prepare($ret) ;
                         $stmt->bind_param('i',$id);
-                        $stmt->execute() ;//ok
+                        $stmt->execute() ;
                         $res=$stmt->get_result();
-                        //$cnt=1;
+                        
                         while($row=$res->fetch_object())
                     {
                     ?>
@@ -184,7 +167,7 @@
                         <input class="form-control" readonly name="pass_train_fare" placeholder="<?php echo $row->pass_train_fare;?>"  id="inputText3" type="text">
                       </div>
                     </div>
-                    <!--End TRain  isntance-->
+                 
                     <?php }?>
 
                     <div class="col-sm-6">
@@ -201,9 +184,9 @@
         <?php }?>
         
         </div>
-        <!--footer-->
+        
         <?php include('assets/inc/footer.php');?>
-        <!--EndFooter-->
+     
       </div>
 
     </div>
@@ -221,7 +204,7 @@
     <script src="assets/lib/bs-custom-file-input/bs-custom-file-input.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
+     
       	App.init();
       	App.formElements();
       });

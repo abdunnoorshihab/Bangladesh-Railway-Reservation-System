@@ -1,7 +1,6 @@
 <?php
     session_start();
     include('assets/inc/config.php');
-    //date_default_timezone_set('Africa /Nairobi');
     include('assets/inc/checklogin.php');
     check_login();
     $aid=$_SESSION['emp_id'];
@@ -14,11 +13,6 @@
             $emp_addr=$_POST['emp_addr'];
             $emp_email=$_POST['emp_email'];
             $emp_uname=$_POST['emp_uname'];
-            //$pass_bday=$_POST['pass_bday'];
-            //$pass_ocupation=$_POST['pass_occupation'];
-            //$pass_bio=($_POST['pass_bio']);
-            //$passwordconf=md5($_POST['passwordconf']);
-            //$date = date('d-m-Y h:i:s', time());
             $query="update  orrs_employee set emp_fname = ?, emp_lname = ?, emp_phone = ?, emp_addr = ?, emp_email = ?, emp_uname = ? where emp_id=?";
             $stmt = $mysqli->prepare($query);
             $rc=$stmt->bind_param('ssssssi', $emp_fname, $emp_lname, $emp_phone, $emp_addr, $emp_email, $emp_uname, $aid);
@@ -31,9 +25,7 @@
                 {
                     $err = "Please Try Again Later";
                 }
-            #echo"<script>alert('Your Profile Has Been Updated Successfully');</script>";
-            }
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!--Head-->
@@ -87,9 +79,9 @@
             $ret="select * from orrs_employee where emp_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
-            $stmt->execute() ;//ok
+            $stmt->execute() ;
             $res=$stmt->get_result();
-            //$cnt=1;
+            
             while($row=$res->fetch_object())
         {
         ?>
@@ -171,7 +163,6 @@
     <script src="assets/lib/bs-custom-file-input/bs-custom-file-input.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
       	App.init();
       	App.formElements();
       });

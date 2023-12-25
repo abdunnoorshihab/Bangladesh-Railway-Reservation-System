@@ -7,22 +7,18 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <!--Head-->
+  
   <?php include("assets/inc/head.php");?>
-  <!--End Head-->
-  <!--Log on to codeastro.com for more projects!-->
+  
   <body>
 
     <div class="be-wrapper be-fixed-sidebar">
 
-    <!--Navbar-->
+  
      <?php include("assets/inc/navbar.php");?>
-      <!--End Nav Bar-->
-
-      <!--Sidebar-->
+     
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
-		<!--Log on to codeastro.com for more projects!-->
+     
       <div class="be-content">
         <div class="main-content container-fluid">
           <div class="row">
@@ -47,7 +43,7 @@
                   </div>
               </a>
             </div>
-			<!--Log on to codeastro.com for more projects!-->
+			
             <div class="col-12 col-lg-6 col-xl-4">
               <a href="pass-print-ticket.php">
                 <div class="widget widget-tile">
@@ -70,7 +66,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                <!--Start Table-->
+               
                   <table class="table table-striped table-bordered table-hover table-fw-widget" id="table1">
                     <thead class="thead-dark">
                       <tr>
@@ -87,9 +83,9 @@
                     <tbody>
                       <?php
 
-                        $ret="SELECT * FROM orrs_train ORDER BY RAND() LIMIT 10 "; //sql code to get to ten trains randomly
+                        $ret="SELECT * FROM orrs_train ORDER BY RAND() LIMIT 10 "; 
                         $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;//ok
+                        $stmt->execute() ;
                         $res=$stmt->get_result();
                         $cnt=1;
                         while($row=$res->fetch_object())
@@ -109,16 +105,15 @@
                       <?php $cnt=$cnt+1; }?>
                     </tbody>
                   </table>
-                  <!--eND Table-->
+                 
                 </div>
               </div>
             </div>
           </div>
-         <!--Log on to codeastro.com for more projects!-->
         </div>
-        <!--footer-->
+        
         <?php include('assets/inc/footer.php');?>
-        <!--EndFooter-->
+        
       </div>
      
     </div>
@@ -155,7 +150,7 @@
     
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
+      	
       	App.init();
       	App.dashboard();
       

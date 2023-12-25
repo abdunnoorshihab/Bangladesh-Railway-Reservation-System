@@ -1,49 +1,38 @@
-<!--Start Server side code to give us and hold session-->
 <?php
   session_start();
   include('assets/inc/config.php');
   include('assets/inc/checklogin.php');
   check_login();
   $aid=$_SESSION['admin_id'];
-  //delete or remove library user  php code
-if(isset($_GET['del']))
-{
-      $id=intval($_GET['del']);
-      $adn="delete from orrs_train where id=?";
-      $stmt= $mysqli->prepare($adn);
-      $stmt->bind_param('i',$id);
-      $stmt->execute();
-      $stmt->close();	 
+  if(isset($_GET['del']))
+  {
+    $id=intval($_GET['del']);
+    $adn="delete from orrs_train where id=?";
+    $stmt= $mysqli->prepare($adn);
+    $stmt->bind_param('i',$id);
+    $stmt->execute();
+    $stmt->close();	 
 
-        if($stmt)
-        {
-          $succ = "Train Details Deleted";
-        }
-          else
-          {
-            $err = "Try Again Later";
-          }
-      #echo "<script>alert('Success! Book details removed');</script>" ;
-}
+    if($stmt)
+    {
+      $succ = "Train Details Deleted";
+    }
+    else
+    {
+      $err = "Try Again Later";
+    }
+  }
 ?>
-<!--End Server side scriptiing-->
 <!DOCTYPE html>
 <html lang="en">
-<!--HeAD-->
   <?php include('assets/inc/head.php');?>
- <!-- end HEAD--> 
   <body>
     <div class="be-wrapper be-fixed-sidebar">
-    <!--navbar-->
       <?php include('assets/inc/navbar.php');?>
-      <!--End navbar-->
-	  <!--Log on to codeastro.com for more projects!-->
-      <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
 
       <div class="be-content">
-      <div class="page-head">
+        <div class="page-head">
           <h2 class="page-head-title">Manage Tickets</h2>
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb page-head-nav">
@@ -54,30 +43,25 @@ if(isset($_GET['del']))
           </nav>
         </div>
         <?php if(isset($succ)) {?>
-                                <!--This code for injecting an alert-->
-                <script>
-                            setTimeout(function () 
-                            { 
-                                swal("Success!","<?php echo $succ;?>!","success");
-                            },
-                                100);
-                </script>
-
+          <script>
+            setTimeout(function () 
+            { 
+              swal("Success!","<?php echo $succ;?>!","success");
+            },
+            100);
+          </script>
         <?php } ?>
         <?php if(isset($err)) {?>
-        <!--This code for injecting an alert-->
-                <script>
-                            setTimeout(function () 
-                            { 
-                                swal("Failed!","<?php echo $err;?>!","Failed");
-                            },
-                                100);
-                </script>
-
+          <script>
+            setTimeout(function () 
+            { 
+              swal("Failed!","<?php echo $err;?>!","Failed");
+            },
+            100);
+          </script>
         <?php } ?>
 
         <div class="main-content container-fluid">
-		<!--Log on to codeastro.com for more projects!-->
           <div class="row">
             <div class="col-sm-12">
               <div class="card card-table">
@@ -104,20 +88,16 @@ if(isset($_GET['del']))
                       </tr> 
                     </thead>
                     <tbody>
-					<!--Log on to codeastro.com for more projects!-->
-                    <?php
-                        /*
-                        *Lets get details of available trains tickets! !
-                        */
-                        $ret="SELECT * FROM `orrs_train_tickets` "; //sql code to get all details of trains.
-                        $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;//ok
+                      <?php
+                        $ret="SELECT * FROM `orrs_train_tickets` ";
+                        $stmt= $mysqli->prepare($ret);
+                        $stmt->execute();
                         $res=$stmt->get_result();
                         $cnt=1;
                         while($row=$res->fetch_object())
                         {
-                    ?>
-                      <tr class="odd gradeX even gradeC odd gradeA even gradeA ">
+                      ?>
+                      <tr class="odd gradeX even gradeC odd gradeA even gradeA">
                         <td><?php echo $row->pass_name;?></td>
                         <td><?php echo $row->pass_email;?></td>
                         <td><?php echo $row->pass_addr;?></td>
@@ -126,25 +106,22 @@ if(isset($_GET['del']))
                         <td class="center"><?php echo $row->train_arr_stat;?></td>
                         <td class="center">$<?php echo $row->train_fare;?></td>
                         <td class="center"><?php echo $row->fare_payment_code;?></td>
-                        <td class="center"><a class ="badge badge-success" href ="emp-confirm-tickets.php?ticket_id=<?php echo $row->ticket_id;?>">Manage</a> 
-                            <hr> <a class ="badge badge-danger" href ="emp-manage-tickets.php?del=<?php echo $row->ticket_id;?>">Delete</a>
-                        </td>                      
+                        <td class="center">
+                          <a class="badge badge-success" href="emp-confirm-tickets.php?ticket_id=<?php echo $row->ticket_id;?>">Manage</a>
+                          <hr>
+                          <a class="badge badge-danger" href="emp-manage-tickets.php?del=<?php echo $row->ticket_id;?>">Delete</a>
+                        </td>
                       </tr>
-                        <?php }?>
+                      <?php }?>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
           </div>
-         
-         <!--footer-->
-		 <!--Log on to codeastro.com for more projects!-->
          <?php include('assets/inc/footer.php');?>
-         <!--End Footer-->
         </div>
       </div>
-     
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.min.js" type="text/javascript"></script>
@@ -165,11 +142,9 @@ if(isset($_GET['del']))
     <script src="assets/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
-      	App.init();
-      	App.dataTables();
+        App.init();
+        App.dataTables();
       });
     </script>
   </body>
-
 </html>

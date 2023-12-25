@@ -1,11 +1,9 @@
-<!--Start Server side code to give us and hold session-->
 <?php
   session_start();
   include('assets/inc/config.php');
   include('assets/inc/checklogin.php');
   check_login();
   $aid=$_SESSION['emp_id'];
-  //delete or remove library user  php code
 if(isset($_GET['del']))
 {
       $id=intval($_GET['del']);
@@ -23,28 +21,19 @@ if(isset($_GET['del']))
           {
             $err = "Try Again Later";
           }
-      #echo "<script>alert('Success! Book details removed');</script>" ;
 }
 ?>
-<!--End Server side scriptiing-->
-<!--Log on to codeastro.com for more projects!-->
 <!DOCTYPE html>
 <html lang="en">
-<!--HeAD-->
   <?php include('assets/inc/head.php');?>
- <!-- end HEAD--> 
   <body>
     <div class="be-wrapper be-fixed-sidebar">
-    <!--navbar-->
       <?php include('assets/inc/navbar.php');?>
-      <!--End navbar-->
       <!--Sidebar-->
       <?php include('assets/inc/sidebar.php');?>
-      <!--End Sidebar-->
 
       <div class="be-content">
       <div class="page-head">
-	  <!--Log on to codeastro.com for more projects!-->
           <h2 class="page-head-title">Pending Approval Tickets</h2>
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb page-head-nav">
@@ -55,7 +44,6 @@ if(isset($_GET['del']))
           </nav>
         </div>
         <?php if(isset($succ)) {?>
-                                <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -66,7 +54,6 @@ if(isset($_GET['del']))
 
         <?php } ?>
         <?php if(isset($err)) {?>
-        <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
@@ -88,7 +75,6 @@ if(isset($_GET['del']))
                     </div>
                   </div>
                 </div>
-				<!--Log on to codeastro.com for more projects!-->
                 <div class="card-body">
                   <table class="table table-striped table-bordered table-hover table-fw-widget" id="table1">
                     <thead class="thead-dark">
@@ -106,12 +92,9 @@ if(isset($_GET['del']))
                     </thead>
                     <tbody>
                     <?php
-                        /*
-                        *Lets get details of available trains tickets! !
-                        */
                         $ret="SELECT * FROM `orrs_train_tickets` where confirmation !='Approved' "; //sql code to get all details of trains.
                         $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;//ok
+                        $stmt->execute() ;
                         $res=$stmt->get_result();
                         $cnt=1;
                         while($row=$res->fetch_object())
@@ -139,10 +122,7 @@ if(isset($_GET['del']))
             </div>
           </div>
          
-         <!--footer-->
-		 <!--Log on to codeastro.com for more projects!-->
          <?php include('assets/inc/footer.php');?>
-         <!--End Footer-->
         </div>
       </div>
      
@@ -166,7 +146,6 @@ if(isset($_GET['del']))
     <script src="assets/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-      	//-initialize the javascript
       	App.init();
       	App.dataTables();
       });
